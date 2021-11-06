@@ -1,7 +1,6 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-var passwordLength = 0;
 var passwordArray;
 var passwordString;
 var lowerCase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
@@ -10,8 +9,8 @@ var numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 var special = [" ", "!", '"', '#', '$', '%', '&', "'", ')', '(', '*', '+', ',', '-', '.', '/', ':', '<', '=', '>', '?', '@', '[', '\\', '[', '^', '_', '`', '{', '|', '}', '~']; 
 
 
-function generatePassword() {
-    passwordLength = prompt('How many characters would you like your password to contain?');
+function getLength() {
+    var passwordLength = prompt('How many characters would you like your password to contain?');
     while (passwordLength > 128 || passwordLength < 8) {
         if (passwordLength > 128) {
             alert ('Your password must contain less than 129 characters.');
@@ -22,11 +21,21 @@ function generatePassword() {
         }
     }
     return passwordLength;
+    
 
 }
 
 
-var length = prompt("Please enter your password")
+
+function generatePassword() {
+    var specCheck = confirm('Press okay to confirm that you would like your password to contain special characters.');
+    var numCheck = confirm('Press okay to confirm that you would like your password to contain numbers.');
+    var lowCheck = confirm('Press okay to confirm that you would like your password to contain lower case characters.');
+    var upCheck = confirm('Press okay to confirm that you would like your password to contain upper case characters.');
+
+    var check = (+ specCheck) + (+ numCheck) + (+ lowCheck) + (+ upCheck);
+    return check;
+}
 
 // Write password to the #password input
 function writePassword() {
