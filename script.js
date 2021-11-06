@@ -25,16 +25,28 @@ function getLength() {
 
 }
 
-
-
-function generatePassword() {
+function getTypes(){
+    // Ask user what charater types should be included in password
     var specCheck = confirm('Press okay to confirm that you would like your password to contain special characters.');
     var numCheck = confirm('Press okay to confirm that you would like your password to contain numbers.');
     var lowCheck = confirm('Press okay to confirm that you would like your password to contain lower case characters.');
     var upCheck = confirm('Press okay to confirm that you would like your password to contain upper case characters.');
 
+    // create variable that equals zero if user rejects all character types
     var check = (+ specCheck) + (+ numCheck) + (+ lowCheck) + (+ upCheck);
     return check;
+}
+
+
+
+function generatePassword() {
+    var length = getLength();
+    var check = getTypes();
+
+    while (check === 0){
+        alert("Your password must contain at least one of the following four character types: special characters, numbers, upper case letters or lower case letters.");
+        check = getTypes();
+    }
 }
 
 // Write password to the #password input
