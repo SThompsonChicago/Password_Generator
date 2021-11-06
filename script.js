@@ -1,8 +1,6 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-var passwordArray;
-var passwordString;
 var lowerCase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 var upperCase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 var numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
@@ -34,19 +32,45 @@ function getTypes(){
 
     // create variable that equals zero if user rejects all character types
     var check = (+ specCheck) + (+ numCheck) + (+ lowCheck) + (+ upCheck);
-    return check;
+    return [check, specCheck, numCheck, lowCheck, upCheck];
 }
 
 
 
 function generatePassword() {
+    var password;
+    var chars = [];
     var length = getLength();
-    var check = getTypes();
+    var types = getTypes();
 
-    while (check === 0){
+    // if user rejects all character types, repeat options
+    while (types[0] === 0){
         alert("Your password must contain at least one of the following four character types: special characters, numbers, upper case letters or lower case letters.");
-        check = getTypes();
+        types = getTypes();
     }
+
+    console.log(types);
+
+    // if user wants special characters in password, add special characters to chars string
+    if (types[1]){
+        chars = chars.concat(special);
+    }
+    if (types[2]){
+        chars = chars.concat(numbers);
+    }
+    if (types[3]){
+        chars = chars.concat(lowerCase);
+    }
+    if (types[4]){
+        chars = chars.concat(upperCase);
+    }
+
+    console.log(chars);
+
+    return password;
+
+    
+    
 }
 
 // Write password to the #password input
