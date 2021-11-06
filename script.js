@@ -4,7 +4,7 @@ var generateBtn = document.querySelector("#generate");
 var lowerCase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 var upperCase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 var numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
-var special = [" ", "!", '"', '#', '$', '%', '&', "'", ')', '(', '*', '+', ',', '-', '.', '/', ':', '<', '=', '>', '?', '@', '[', '\\', '[', '^', '_', '`', '{', '|', '}', '~']; 
+var special = ["!", '"', '#', '$', '%', '&', "'", ')', '(', '*', '+', ',', '-', '.', '/', ':', '<', '=', '>', '?', '@', '[', '\\', '[', '^', '_', '`', '{', '|', '}', '~']; 
 
 
 function getLength() {
@@ -38,9 +38,10 @@ function getTypes(){
 
 
 function generatePassword() {
-    var password;
+    var password = '';
     var chars = [];
-    var length = getLength();
+    var charsNum;
+    var passwordLength = getLength();
     var types = getTypes();
 
     // if user rejects all character types, repeat options
@@ -51,21 +52,37 @@ function generatePassword() {
 
     console.log(types);
 
-    // if user wants special characters in password, add special characters to chars string
+    // if user wants special characters in password, add special characters to chars array
     if (types[1]){
         chars = chars.concat(special);
     }
+    // if user wants numbers in password, add numbers to chars array
     if (types[2]){
         chars = chars.concat(numbers);
     }
+    // if user wants lower case letters in password, add them to chars array
     if (types[3]){
         chars = chars.concat(lowerCase);
     }
+    // if user wants upper case letters in password, add them chars array
     if (types[4]){
         chars = chars.concat(upperCase);
     }
 
-    console.log(chars);
+    charsNum = chars.length;
+
+
+
+    // Randomly choose elements of the chars array and then add them to the password string
+    // The number of randomly chosen characters must equal the chosen length of the password
+    for(let i = 0; i < passwordLength; i++){
+        // choose a random integer that is nonnegative and strictly less than charsNum
+        var random = Math.floor(Math.random()*charsNum);
+        // Concatenate random element of chars array with password
+        password += chars[random];
+    }
+
+    console.log(password);
 
     return password;
 
